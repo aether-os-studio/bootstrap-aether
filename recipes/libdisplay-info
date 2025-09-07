@@ -10,7 +10,13 @@ hostdeps="gcc pkg-config"
 deps="core-libs hwdata"
 
 configure() {
-    meson_configure
+    cp -r "${source_dir}" "${build_dir}"/builds/libdisplay-info-src
+    cd "${build_dir}"/builds/libdisplay-info-src
+    
+        CFLAGS="$TARGET_CFLAGS" \
+        CXXFLAGS="$TARGET_CXXFLAGS" \
+        LDFLAGS="$TARGET_LDFLAGS" \
+    meson_source_dir="${build_dir}"/builds/libdisplay-info meson_configure_noflags
 }
 
 build() {
